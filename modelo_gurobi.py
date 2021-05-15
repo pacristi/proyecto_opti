@@ -1,4 +1,5 @@
-from gurobipy import *
+from gurobipy import Model, GRB, quicksum
+import random
 
 m = Model()
 
@@ -20,13 +21,13 @@ F_pe = #el paciente p necesita el examen e
 G_le = #en el lugar l se puede realizar el exámen e
 I_el = #cantidad de exámenes e que se pueden realizar simultaneamente en l
 K_e = #tiempo del exámen e
-N_te = #el trabajador t puede realizar el exámen e
+N_te = {t, e: random.randint(0, 1) for t in trabajadores for e in examenes} #el trabajador t puede realizar el exámen e
 
 #varaibles
-M_tpdhel = m.addVars(vtype=GRB.BINARY)
-X_ld = m.addVars(vtype=GRB.BINARY)
-Y_tld = m.addVars(vtype=GRB.BINARY)
-Z_pld = m.addVars(vtype=GRB.BINARY)
-O_ep = m.addVars(vtype=GRB.BINARY)
-W_tep = m.addVars(vtype=GRB.BINARY)
-V_tpdhel = m.addVars(vtype=GRB.BINARY)
+M_tpdhel = m.addVars(vtype=GRB.BINARY, name="M_tpdhel")
+X_ld = m.addVars(vtype=GRB.BINARY, name="X_ld")
+Y_tld = m.addVars(vtype=GRB.BINARY, name="Y_tld")
+Z_pld = m.addVars(vtype=GRB.BINARY, name="Z_pld")
+O_ep = m.addVars(vtype=GRB.BINARY, name="O_ep")
+W_tep = m.addVars(vtype=GRB.BINARY, name="W_tep")
+V_tpdhel = m.addVars(vtype=GRB.BINARY, name="V_tpdhel")
